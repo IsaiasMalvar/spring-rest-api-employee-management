@@ -3,10 +3,7 @@ package com.restapi.springboot.crud.rest;
 import com.restapi.springboot.crud.dao.EmployeeDAO;
 import com.restapi.springboot.crud.entity.Employee;
 import com.restapi.springboot.crud.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +33,16 @@ public class EmployeeRestController {
         }
 
         return theEmployee;
+    }
+
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee theEmployee){
+
+        theEmployee.setId(0);
+
+        Employee dbEmployee = employeeService.save(theEmployee);
+
+        return dbEmployee;
     }
 
 }
